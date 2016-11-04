@@ -1,0 +1,88 @@
+__templates:
+  pip-config: &pip-config
+    dependencies: true
+    python-exe: python3.5
+  locale-environ: &locale-environ
+    LC_ALL: en_US.UTF-8
+    LANG: en_US.UTF-8
+
+containers:
+  app-freezer:
+    setup:
+      - !Alpine v3.4
+      - !PipConfig
+        <<: *pip-config
+      - !Py3Install
+        - pip 
+        - aiohttp
+        - aiohttp-jinja2
+        - click
+        - motor
+        - PyYAML
+        - uvloop
+
+  app:
+    setup:
+      - !Ubuntu xenial
+      - !PipConfig
+        <<: *pip-config
+      - !Py3Requirements requirements.txt
+    environ:
+      <<: *locale-environ
+
+  mongodb:
+    setup:
+      - !Ubuntu xenial
+      - !AptTrust keys: [EA312927]
+      - !UbuntuRepo
+        url: http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2
+        suite: multiverse
+        components: []
+      - !Install
+        - mongodb-org=3.2.6
+        - mongodb-org-server=3.2.6
+        - mongodb-org-shell=3.2.6
+        - mongodb-org-mongos=3.2.6
+        - mongodb-org-tools=3.2.6
+      - !EnsureDir /data/db
+    volumes:
+      /data/db: !Persistent
+        name: mongo-storage
+        init-command: _init_mongo
+    environ:
+      <<: *locale-environ
+
+commands:
+  _init_mongo: !Command
+    description: Initializes mongodb data
+    container: mongodb
+    run: |
+      mongod --fork --syslog
+      echo "No mongo init commands specified"
+      mongod --shutdown
+
+  freeze: !Command
+    description: "Freeze project dependencies to requirements.txt"
+    container: app-freezer
+    run: |
+      if test -f /work/requirements.txt; then
+        mv requirements.txt requirements.txt.old
+      fi
+      pip freeze > requirements.txt
+      if test -f /work/requirements.txt.old; then
+        diff requirements.txt.old requirements.txt
+      fi
+
+  run: !Supervise
+    description: "Run project with environment"
+    children:
+      mongo: !Command
+        description: "Run mongodb datbase"
+        container: mongodb
+        run: mongod --rest
+      app: !Command
+        description: "Run application"
+        container: app
+        run: python3 run.py config/dev.yaml
+
+#  vim: set ts=2 sw=2 tw=0 et :

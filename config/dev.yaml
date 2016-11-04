@@ -1,0 +1,10 @@
+app:
+  host: 0.0.0.0
+  port: 5001
+
+mongo:
+  host: 0.0.0.0
+  port: 27017
+  db: app
+
+#  vim: set ts=2 sw=2 tw=0 et :

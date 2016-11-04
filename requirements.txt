@@ -1,0 +1,13 @@
+aiohttp==1.0.5
+aiohttp-jinja2==0.8.0
+async-timeout==1.1.0
+chardet==2.3.0
+click==6.6
+greenlet==0.4.10
+Jinja2==2.8
+MarkupSafe==0.23
+motor==0.6.2
+multidict==2.1.2
+pymongo==2.8
+PyYAML==3.12
+uvloop==0.5.4
