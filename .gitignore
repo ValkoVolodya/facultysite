@@ -94,3 +94,6 @@ ENV/
 
 # node_modules
 node_modules/
+
+# static folder
+static/
