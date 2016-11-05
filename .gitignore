@@ -88,3 +88,9 @@ ENV/
 # Rope project settings
 .ropeproject
 .vagga/
+
+# IDEA files
+.idea/
+
+# node_modules
+node_modules/
