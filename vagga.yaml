@@ -5,15 +5,23 @@ __templates:
   locale-environ: &locale-environ
     LC_ALL: en_US.UTF-8
     LANG: en_US.UTF-8
+  node_env: &node_env
+    NODE_PATH: /usr/local/lib/node_modules
 
 containers:
+  static:
+    setup:
+      - !Ubuntu xenial
+      - !NpmDependencies
+        file: package.json
+
   app-freezer:
     setup:
       - !Alpine v3.4
       - !PipConfig
         <<: *pip-config
       - !Py3Install
-        - pip 
+        - pip
         - aiohttp
         - aiohttp-jinja2
         - click
@@ -72,6 +80,14 @@ commands:
       if test -f /work/requirements.txt.old; then
         diff requirements.txt.old requirements.txt
       fi
+
+  webpack: !Command
+    description: Build static
+    container: static
+    environ:
+      <<: *node_env
+      NODE_ENV: production
+    run: [webpack]
 
   run: !Supervise
     description: "Run project with environment"
