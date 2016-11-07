@@ -14,3 +14,8 @@ async def index(request):
         'status': 'OK',
         'data': data,
     }
+
+
+@template('about.html')
+async def about(request):
+    return {}

@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>App</title>
-  </head>
+{% extends "base.html" %}
 
-  <body>
-    <h1>Welcome</h1>
-    <span>Status is {{status}}</span>
-    <p>Data is {{data}}</p>
-  </body>
-</html>
+{% block title %}Index{% endblock %}
 
+{% block content %}
+  <div>Data is {{ data }}</div>
+  <div>Status is {{ status }}</div>
+{% endblock %}
 <!-- vim: set ts=2 sw=2 tw=0 et :-->

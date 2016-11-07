@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- TODO: replace with url_for or similar function -->
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css"/>
+
+    <title>{% block title %}{% endblock %}</title>
+  </head>
+
+  <html>
+    <nav>
+      <a href="/">Index</a>
+      <a href="/about">About us</a>
+    </nav>
+    <main>
+      {% block content %}
+      {% endblock %}
+    </main>
+  </html>
+</html>
+
+<!-- vim: set ts=2 sw=2 sts=2 tw=0 et :-->

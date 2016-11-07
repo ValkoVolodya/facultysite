@@ -37,6 +37,7 @@ async def init_app(loop, config_filename):
 
     # Setup views
     app.router.add_route('GET', '/', root_handler.index)
+    app.router.add_route('GET', '/about', root_handler.about)
     app.router.add_route('GET', '/api/misc/{id}', api_misc_handler.get)
     app.router.add_route('POST', '/api/misc/', api_misc_handler.create)
 
