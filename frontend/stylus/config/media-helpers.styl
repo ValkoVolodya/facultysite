@@ -1,0 +1,32 @@
+//Width for media queries
+$mobile-min = 320px
+$mobile-max = 480px
+
+$tab-min = 768px
+$tab-max = 900px
+
+$desktop = 1200px
+
+//Media queries mixin definition
+media-queries = {
+  mobile1 : "screen and (min-width: $mobile-min)",
+  mobile1_only : "screen and (min-width: $mobile-min) and (max-width: $mobile-max)"
+  mobile2 : "screen and (min-width: $mobile-max)",
+  mobile2_only : "screen and (min-width: $mobile-max) and (max-width: $tab-min)"
+  tab1 : "screen and ($min-width: tab-min)",
+  tab1_only : "screen and (min-width: $tab-min) and (max-width: $tab-max)"
+  tab2 : "screen and ($min-width: tab-max)",
+  tab2_only : "screen and (min-width: $tab-max) and (max-width: $desktop)"
+  desktop : "screen and ($min-width: desktop)"
+}
+
+//Call this mixin like this:
+//+for-device(mobile1 mobile2 <other keys from media-queries>)
+//  <css here>
+for_device(devices)
+  conditions = ()
+  for device in devices
+    push(conditions, media-queries[device])
+  conditions = join(', ', conditions)
+  @media conditions
+    {block}
