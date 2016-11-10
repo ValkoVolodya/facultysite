@@ -9,16 +9,70 @@
     <title>{% block title %}{% endblock %}</title>
   </head>
 
-  <html>
-    <nav>
-      <a href="/">Index</a>
-      <a href="/about">About us</a>
-    </nav>
-    <main>
-      {% block content %}
+  <body>
+    <div class="flt-wrapper">
+      {% block header %}
+        <div class="flt-header-content">
+            <div class="flt-header">
+                <div class="flt-logo__holder">
+                    <div class="flt-logo">
+                        <a class="flt-logo__link">
+                            <div class="flt-logo__text flt-logo__text_bigger">
+                                ОТ
+                            </div>
+                            <div class="flt-logo__text">
+                                кафедра
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="flt-menu__holder">
+                    <div class="flt-menu__list">
+                        <div class="flt-menu__item">
+                            <a href="" class="flt-menu__link">
+                            <span class="flt-menu__text">
+                                Про кафедру
+                            </span>
+                            </a>
+                        </div>
+                        <div class="flt-menu__item">
+                            <a href="" class="flt-menu__link">
+                                <span class="flt-menu__text">
+                                    Абітурфєнту
+                                </span>
+                            </a>
+                        </div>
+                        <div class="flt-menu__item">
+                            <a href="" class="flt-menu__link">
+                                <span class="flt-menu__text">
+                                    Учбовий процес
+                                </span>
+                            </a>
+                        </div>
+                        <div class="flt-menu__item">
+                            <a href="" class="flt-menu__link">
+                                <span class="flt-menu__text">
+                                    Наукова робота
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
       {% endblock %}
-    </main>
-  </html>
+      <main>
+        {% block content %}
+        {% endblock %}
+      </main>
+
+      {% block footer %}
+
+      {% endblock %}
+    </div>
+    <!-- TODO: replace with url_for or similar function -->
+    <script src="/static/js/main.bundle.js"></script>
+  </body>
 </html>
 
 <!-- vim: set ts=2 sw=2 sts=2 tw=0 et :-->

@@ -2,6 +2,10 @@
 
 {% block title %}Index{% endblock %}
 
+{% block header %}
+  {{ super() }}
+{% endblock %}
+
 {% block content %}
   <div>Data is {{ data }}</div>
   <div>Status is {{ status }}</div>
