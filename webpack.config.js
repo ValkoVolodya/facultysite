@@ -10,7 +10,7 @@ module.exports = {
     },
     context: path.join(__dirname, 'frontend'),
     entry: {
-        'main': './js/main.js',
+        'main': './js/main.js'
     },
     resolveLoader: {
         root: '/usr/local/lib/node_modules'
