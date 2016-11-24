@@ -87,7 +87,7 @@ commands:
     environ:
       <<: *node_env
       NODE_ENV: production
-    run: [webpack]
+    run: [webpack, --progress]
 
   run: !Supervise
     description: "Run project with environment"
